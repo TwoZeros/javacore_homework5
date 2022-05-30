@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class EmployeeParser {
+public class EmployeeParser extends SimpleParser<Employee>{
 
-    private static final SimpleParser<Employee> simpleParser = new SimpleParser<>(Employee.class);
+    public  EmployeeParser() {
+        this.setClassName(Employee.class);
+    }
 
     public List<Employee> parseXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -40,26 +42,5 @@ public class EmployeeParser {
                 .collect(Collectors.toList());
         return employeeList;
     }
-
-    public List<Employee> parseCSV(String[] columnMapping, String fileName) {
-        return simpleParser.parseCSV(columnMapping, fileName);
-    }
-
-    public String listToJson(List<Employee> list) {
-        return simpleParser.listToJson(list);
-    }
-
-    public void writeToFile(String fileName, String text) {
-        simpleParser.writeToFile(fileName, text);
-    }
-
-    public String readString(String fileName) {
-        return simpleParser.readString(fileName);
-    }
-
-    public List<Employee> jsonToList(String json) {
-        return simpleParser.jsonToList(json);
-    }
-
 
 }

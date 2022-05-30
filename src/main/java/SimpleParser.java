@@ -11,9 +11,15 @@ import java.util.List;
 
 public class SimpleParser<T> {
     private static final Gson gson = new GsonBuilder().create();
-    private final Class<T> className;
+    private Class<T> className;
 
     public SimpleParser(Class<T> className) {
+        this.className = className;
+    }
+
+    public SimpleParser() {};
+
+    public void setClassName(Class<T> className) {
         this.className = className;
     }
 
