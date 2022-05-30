@@ -25,7 +25,7 @@ public class Main {
         String json2 = parser.listToJson(employeeList);
         parser.writeToFile(jsonFileName2, json2);
         //Задание 3
-        String json3 = parser.readString("data.json");
+        String json3 = parser.readString(jsonFileName1);
         List<Employee> employees =  parser.jsonToList(json3);
         System.out.println(employees);
     }

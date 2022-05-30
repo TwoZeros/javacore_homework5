@@ -25,14 +25,19 @@ public class EmployeeParser {
         Document document = builder.parse(new File(fileName));
         Node root = document.getDocumentElement();
         NodeList nodeList = root.getChildNodes();
-        List<Employee> employeeList = IntStream.range(0, nodeList.getLength()).mapToObj(nodeList::item).filter(i -> Node.ELEMENT_NODE == i.getNodeType()).map(i -> (Element) i).map(i -> {
-            long id = Long.parseLong(i.getElementsByTagName("id").item(0).getTextContent());
-            String firstName = i.getElementsByTagName("firstName").item(0).getTextContent();
-            String lastName = i.getElementsByTagName("lastName").item(0).getTextContent();
-            String country = i.getElementsByTagName("country").item(0).getTextContent();
-            int age = Integer.parseInt(i.getElementsByTagName("age").item(0).getTextContent());
-            return new Employee(id, firstName, lastName, country, age);
-        }).collect(Collectors.toList());
+        List<Employee> employeeList = IntStream.range(0, nodeList.getLength())
+                .mapToObj(nodeList::item)
+                .filter(i -> Node.ELEMENT_NODE == i.getNodeType())
+                .map(i -> (Element) i)
+                .map(i -> {
+                    long id = Long.parseLong(i.getElementsByTagName("id").item(0).getTextContent());
+                    String firstName = i.getElementsByTagName("firstName").item(0).getTextContent();
+                    String lastName = i.getElementsByTagName("lastName").item(0).getTextContent();
+                    String country = i.getElementsByTagName("country").item(0).getTextContent();
+                    int age = Integer.parseInt(i.getElementsByTagName("age").item(0).getTextContent());
+                    return new Employee(id, firstName, lastName, country, age);
+                })
+                .collect(Collectors.toList());
         return employeeList;
     }
 
